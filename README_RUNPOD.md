@@ -10,9 +10,9 @@ git clone https://github.com/allthingssecurity/rlagent
 cd rlagent
 ```
 
-2. Run the installation script:
+2. Run the FIXED installation script:
 ```bash
-bash runpod_install.sh
+bash runpod_install_fixed.sh
 ```
 
 3. Start training:
