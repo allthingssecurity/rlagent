@@ -262,8 +262,11 @@ async def main():
     
     finally:
         # Cleanup
-        if 'backend' in locals():
-            await backend.close()
+        if 'backend' in locals() and backend is not None:
+            try:
+                backend.close()  # Note: close() is not async in LocalBackend
+            except Exception as e:
+                print(f"Warning: Error during cleanup: {e}")
 
 
 if __name__ == "__main__":

@@ -36,6 +36,7 @@ pip install safetensors>=0.3.0
 # Training deps
 pip install trl>=0.7.0
 pip install peft>=0.5.0
+pip install torchtune>=0.1.0
 
 # Utility deps
 pip install scipy>=1.9.0

@@ -61,6 +61,7 @@ def main():
         # Training framework deps
         "trl>=0.7.0",
         "peft>=0.5.0",
+        "torchtune>=0.1.0",
         
         # API and service deps
         "fastapi>=0.104.0",
