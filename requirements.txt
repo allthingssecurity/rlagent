@@ -19,11 +19,11 @@ tokenizers>=0.13.0
 datasets>=2.12.0
 huggingface-hub>=0.16.0
 safetensors>=0.3.0
-vllm>=0.2.0
+vllm==0.2.7
 
 # Training framework dependencies
-trl>=0.7.0
-peft>=0.5.0
+trl==0.7.4
+peft==0.6.2
 torchtune>=0.1.0
 torchao>=0.1.0
 unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git
