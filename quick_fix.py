@@ -7,47 +7,80 @@ Just run this to install the missing package.
 import subprocess
 import sys
 
-def install_torchtune():
-    """Install torchtune package."""
-    print("🔧 Installing missing torchtune package...")
+def install_torch_deps():
+    """Install torchao and torchtune packages."""
+    print("🔧 Installing missing PyTorch dependencies...")
     
+    # Install torchao first (required by torchtune)
     try:
+        print("   Installing torchao...")
+        subprocess.check_call([
+            sys.executable, "-m", "pip", "install", "torchao>=0.1.0"
+        ])
+        print("   ✅ torchao installed!")
+    except subprocess.CalledProcessError:
+        print("   ⚠️ torchao failed, trying alternative...")
+        try:
+            subprocess.check_call([
+                sys.executable, "-m", "pip", "install", "torchao", "--pre", 
+                "--index-url", "https://download.pytorch.org/whl/nightly/cu118"
+            ])
+            print("   ✅ torchao installed from nightly!")
+        except subprocess.CalledProcessError:
+            print("   ❌ torchao failed with all methods")
+    
+    # Install torchtune
+    try:
+        print("   Installing torchtune...")
         subprocess.check_call([
             sys.executable, "-m", "pip", "install", "torchtune>=0.1.0"
         ])
-        print("✅ torchtune installed successfully!")
+        print("   ✅ torchtune installed!")
         return True
     except subprocess.CalledProcessError as e:
-        print(f"❌ Failed to install torchtune: {e}")
+        print(f"   ❌ torchtune failed: {e}")
         return False
 
-def test_torchtune():
-    """Test if torchtune can be imported."""
+def test_torch_deps():
+    """Test if torchao and torchtune can be imported."""
+    success = True
+    
+    try:
+        import torchao
+        print(f"✅ torchao working!")
+    except ImportError as e:
+        print(f"❌ torchao import failed: {e}")
+        success = False
+    
     try:
         import torchtune
-        print(f"✅ torchtune {torchtune.__version__} working!")
-        return True
+        print(f"✅ torchtune working!")
     except ImportError as e:
         print(f"❌ torchtune import failed: {e}")
-        return False
+        success = False
+    
+    return success
 
 def main():
-    print("⚡ Quick Fix for torchtune dependency")
+    print("⚡ Quick Fix for PyTorch dependencies")
     print("=" * 40)
     
-    # Install torchtune
-    if install_torchtune():
-        # Test the import
-        if test_torchtune():
-            print("\n🎉 SUCCESS! torchtune is now working!")
+    # Install dependencies
+    if install_torch_deps():
+        # Test the imports
+        if test_torch_deps():
+            print("\n🎉 SUCCESS! All PyTorch dependencies working!")
             print("\n🚀 You can now run:")
             print("   python train_simple.py")
         else:
-            print("\n⚠️ Installation succeeded but import failed.")
-            print("Try restarting your Python session.")
+            print("\n⚠️ Installation succeeded but some imports failed.")
+            print("💡 Try:")
+            print("   1. Restart your Python session")
+            print("   2. Run: python install_torch_deps.py")
     else:
         print("\n❌ Installation failed.")
-        print("Try manual installation: pip install torchtune")
+        print("💡 Try the comprehensive installer:")
+        print("   python install_torch_deps.py")
 
 if __name__ == "__main__":
     main()
