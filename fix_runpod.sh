@@ -32,6 +32,7 @@ pip install accelerate>=0.20.0
 pip install tokenizers>=0.13.0
 pip install huggingface-hub>=0.16.0
 pip install safetensors>=0.3.0
+pip install vllm>=0.2.0
 
 # Training deps
 pip install trl>=0.7.0
