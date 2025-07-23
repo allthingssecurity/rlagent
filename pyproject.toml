@@ -1,0 +1,52 @@
+[project]
+name = "art-http-training"
+version = "0.1.0"
+description = "Generic HTTP-based agent training service using ART framework"
+authors = [
+    {name = "User", email = "user@example.com"}
+]
+dependencies = [
+    "openpipe-art>=0.1.0",
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.25.0",
+    "asyncio-throttle>=1.0.0",
+    # Core ML dependencies
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "accelerate>=0.20.0",
+    "bitsandbytes>=0.41.0",
+    "sentencepiece>=0.1.99",
+    "protobuf>=3.20.0",
+    # Additional dependencies for RunPod
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "tqdm>=4.65.0",
+    "wandb>=0.15.0",
+    "datasets>=2.12.0",
+    "tokenizers>=0.13.0",
+    # System dependencies
+    "psutil>=5.9.0",
+    "GPUtil>=1.4.0",
+]
+readme = "README.md"
+requires-python = ">= 3.10"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
